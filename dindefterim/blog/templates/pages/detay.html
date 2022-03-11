@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %} {{ yazi.baslik }} {% endblock %}
+
+{% block content %}
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+            <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">{{ yazi.baslik }}</h1>
+                            <p>Ünite Özeti</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#page-breadcrumb-->
+
+    <section id="blog-details" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-7">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="single-blog blog-details two-column">
+                                <div class="post-thumb">
+                                    <a href="#"><img src="{{ yazi.resim.url }}" class="img-responsive" alt=""></a>
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a
+                                                href="#"><small>{{ yazi.duzenlenme_tarihi|date:'d-m-y' }}</small></a></span>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="">{{ yazi.baslik }}</a></h2>
+
+                                    <h3 class="post-author">
+                                        <a href="{% url 'profil' username=yazi.yazar.username %}"><i class="fa fa-pencil"></i> Yazar: {{ yazi.yazar.username }}</a>
+                                    {% load konu_list %}
+                                    {% konu_list as konular %}
+                                    {% for konu in konular %}
+                                        <span >
+                                     <!--   <a href="" style="float: right; padding-left: 10px; margin-right: 5px;" ><i class="fa fa-tags" ></i> {{ konu.isim }}</a>  -->
+                                        </span>
+                                    {% endfor %}
+                                    </h3>
+                                    <p>  {{ yazi.icerik|safe }} </p>
+
+                                    <div class="post-bottom overflow">
+                                        <ul class="nav navbar-nav post-nav">
+
+                                            <li><a href="{% url 'like_post' slug=yazi.slug %}"> <i class="fa fa-heart"></i>{{ yazi.total_likes }} Beğeni</a></li>
+
+                                            <li><a href="#"><i class="fa fa-comments"></i> {{ yazi.comment_count }} Yorum </a></li>
+
+                                            {% if  request.user == yazi.yazar %}
+                                            <li><a href="{% url 'yazi-sil' slug=yazi.slug %}"><i class="fa fa-trash"></i>Yazı Sil</a></li>
+                                            <li><a href="{% url 'yazi-guncelle' slug=yazi.slug %}"><i class="fa fa-edit"></i>Yazı Düzenle </a></li>
+                                            {% endif %}
+
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="blog-share">
+                                        <span class='st_facebook_hcount'></span>
+                                        <span class='st_twitter_hcount'></span>
+                                        <span class='st_linkedin_hcount'></span>
+                                        <span class='st_pinterest_hcount'></span>
+                                        <span class='st_email_hcount'></span>
+                                    </div>
+
+                                    <div>
+                                    <h2 class="bold">Yorum Yap</h2>
+                                        <div class="row">
+
+                                            <hr>
+                                            <div class="col-sm-2">
+                                                <img src="{% static 'images/blogdetails/comment-add-3.png' %}" alt="" width="90px" height="90px">
+                                            </div>
+
+                                            <!-- YORUM EKLEME ALANI -->
+                                            <div class="col-sm-10">
+                                                {% if request.user.is_authenticated %}
+                                                  <form method="POST">
+                                                    {% csrf_token %}
+                                                    {{ yorum_ekle_form | crispy }}
+                                                    <input type="submit" value="Yorum Yap" class="btn btn-primary mt-3 mb-3" />
+                                                  </form>
+                                                {%else%}
+                                                  <p>Yorum yapmak için lütfen üye giriş yapınız.</p>
+                                                {%endif%}
+                                            </div>
+                                            <!-- YORUM EKLEME ALANI -->
+                                        </div>
+                                    </div>
+
+                                <!-- =========YORUM ALANI========= -->
+                                    <div class="response-area">
+                                        <hr>
+                                        <h2 class="bold">Yorumlar</h2>
+                                        <ul class="media-list">
+
+                                        <!-- =========YORUM SİLİNDİ MESAJI========= -->
+                                        {% include 'components/message.html' %}
+                                        <!-- =========YORUM SİLİNDİ MESAJI========= -->
+
+                                            <!-- =========YORUM LİSTELEME ALANI========= -->
+                                            {% for yorum in yorumlar %}
+                                                <li class="media">
+                                                    <div class="post-comment">
+
+                                                        {% if yorum.yazan.avatar %}
+                                                            <a class="pull-left" href="#">
+                                                                <img class="media-object"
+                                                                     src="{{ yorum.yazan.avatar.url }}" alt=""
+                                                                     width="90px" height="90px">
+                                                            </a>
+                                                        {% else %}
+                                                            <a class="pull-left" href="#">
+                                                                <img class="media-object" src="{% static 'images/no-avatar.png' %}" alt="" width="90px" height="90px">
+                                                            </a>
+                                                        {% endif %}
+                                                        <div class="media-body">
+                                                            <span><i class="fa fa-user"></i>Yorum yapan <a
+                                                                    href="#">{{ yorum.yazan.username }}</a></span>
+                                                            <p>{{ yorum.yorum }}</p>
+                                                            <ul class="nav navbar-nav post-nav">
+                                                                <li><a href="#"><i class="fa fa-clock-o"></i>{{ yorum.olusturulma_tarihi|date:'d-m-Y' }}</a></li>
+                                                                <li><a href="#"><i class="fa fa-reply"></i>Cevapla</a></li>
+                                                                {% if request.user == yorum.yazan or request.user == yazi.yazar %}
+                                                                <li><a href="{% url 'yorum-sil' id=yorum.id %}"><i class="fa fa-trash"></i>Yorumu Sil</a></li>
+                                                                {% endif %}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% empty %}
+                                                <p>Bu yazı için hiç yorum yapılmamış. </p>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                <!-- YORUM ALANI -->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% include 'components/sidebar.html' %}
+
+
+            </div>
+        </div>
+    </section>
+    <!--/#blog-->
+
+{% endblock %}

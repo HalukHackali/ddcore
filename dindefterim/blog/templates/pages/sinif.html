@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%} {{ sinif.isim }} | dindefterim {% endblock%}
+
+{% block content %}
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title"> {{sinif.isim}} | Üniteler</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#page-breadcrumb-->
+
+    <section id="blog" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-7">
+                    <div class="row">
+                         <!-- ============= MAKALE ============== -->
+                        {% for yazi in yazilar %}
+                        <div class="col-md-6 col-sm-12 blog-padding-right">
+                            <div class="single-blog two-column">
+
+                                <div class="post-thumb">
+                                    <a href="{% url 'detay' slug=yazi.slug %}"><img src="{{ yazi.resim.url }}" class="img-responsive" alt=""></a>
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="{% url 'detay' slug=yazi.slug %}"><small>{{ yazi.duzenlenme_tarihi|date:'d-m-y' }}</small></a></span>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h3 class="post-title bold" style="font-weight: bold"><a href="{% url 'detay' slug=yazi.slug %}">{{ yazi.baslik }}</a></h3>
+                                   <!--
+                                    <h3 class="post-author"><a href="#"><i class="fa fa-pencil"></i> Oluşturan: {{ yazi.yazar.username }}</a></h3>
+                                   -->
+                                    <p> {{ yazi.icerik|safe|truncatechars_html:19}}</p>
+                                    <a href="{% url 'detay' slug=yazi.slug %}" class="read-more">Devamını Oku</a>
+                                    <div class="post-bottom overflow">
+                                        <ul class="nav nav-justified post-nav">
+                                            <li><a> <i class="fa fa-heart"></i>{{ yazi.total_likes }} Beğeni</a></li>
+                                            <li><a href="#"><i class="fa fa-tag"></i>Konu</a></li>
+                                            <li><a href="#"><i class="fa fa-comments"></i>{{ yazi.comment_count }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            {% empty %}
+                            <p>Hiç Yazı Bulunamadı..</p>
+                        {% endfor %}
+
+                    </div><!-- =============ROW END============== -->
+
+
+                    {% if sinif.yazi_count >= 6 %}
+                    <!-- =============PAGINATION============== -->
+                    <div class="blog-pagination">
+                        <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                          <li class="active"><a href="?page={{ page_obj.previous_page_number }}">left</a></li>
+                        {% else %}
+                            <li>
+                              <a class="pageLink" href="#" tabindex="-1" aria-disabled="true">left</a>
+                          </li>
+                        {%  endif %}
+                             <li class="active pageLink"><a href="#">{{ page_obj.number }}</a></li>
+                        {% if page_obj.has_next %}
+                            <li class="active"><a href="?page={{ page_obj.next_page_number }}">right</a></li>
+                       {% else %}
+                            <li class="active"><a href="?page={{ page_obj.paginator.num_pages }}">right</a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                    <!-- =============PAGINATION END============== -->
+                {% endif %}
+
+
+
+
+                 </div>
+                  {% include 'components/sidebar.html' %}
+            </div>
+        </div>
+    </section>
+    <!--/#blog-->
+
+{% endblock %}

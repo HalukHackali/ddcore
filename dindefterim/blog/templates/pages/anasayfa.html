@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+<title>{% block title %}Anasayfa | dindefterim {% endblock %}</title>
+{% block content %}
+
+
+    <section id="home-slider">
+        <div class="container">
+            <div class="row">
+                <div class="main-slider">
+                    <div class="slide-text">
+                        <h1><small> Din Kültürü ve Ahlak Bilgisi </small></h1>
+                        <p>“dindefterim.com” sitesi; İlkokul ve Ortaokul “Din Kültürü ve Ahlak Bilgisi” derslerine yönelik birçok dokümanın paylaşıldığı ücretsiz bir paylaşım sitesidir. Sitemizden daha fazl yararlanmak için kayıt olabilrsiniz.</p>
+                        <a href="{% url 'kayit' %}" class="btn btn-common">Kayıt Ol</a>
+                    </div>
+                    <img src="{% static "images/home/slider/hill.png" %}" class="slider-hill" alt="slider image">
+                    <img src="{% static "images/home/slider/house.png" %}" class="slider-house" alt="slider image">
+                    <img src="{% static "images/home/slider/sun.png" %}" class="slider-sun" alt="slider image">
+                    <img src="{% static "images/home/slider/birds1.png" %}" class="slider-birds1" alt="slider image">
+                    <img src="{% static "images/home/slider/birds2.png" %}" class="slider-birds2" alt="slider image">
+                </div>
+            </div>
+        </div>
+        <div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>
+    </section>
+    <!--/#home-slider-->
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <img src="{% static "images/home/5-sinif.png" %}" alt="">
+                        </div>
+                        <h2>5.Sınıf Üniteler</h2>
+                        <a href="http://127.0.0.1:8000/detay/1unite-allah-inanci"><small>Allah İnancı</small></a><br>
+                        <a href=""><small>Ramazan Ayı ve Oruç</small></a><br>
+                        <a href=""><small>Adap ve Nezaket </small></a><br>
+                        <a href=""><small>Hz.Muhammed ve Aile Hayatı</small></a><br>
+                        <a href=""><small>Çevremizde Dinin İzleri</small></a>
+                    </div>
+                </div>
+                <div class="col-sm-3 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="600ms">
+                            <img src="{% static "images/home/6-sinif.png" %}" alt="">
+                        </div>
+                        <h2>6.Sınıf Üniteler</h2>
+                        <a href=""><small>Peygamberler ve İlahi Kitap İnancı</small></a><br>
+                        <a href=""><small>Namaz</small> </a><br>
+                        <a href=""><small>Zararlı Alışkanlıklar</small></a><br>
+                        <a href=""><small>Hz.Muhammed’in Hayatı</small></a><br>
+                        <a href=""><small>Temel Değerlerimiz</small></a><br>
+                    </div>
+                </div>
+                <div class="col-sm-3 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="900ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="900ms">
+                            <img src="{% static "images/home/7-sinif.png" %}" alt="">
+                        </div>
+                        <h2>7.Sınıf Üniteler</h2>
+                        <a href=""><small>Melek ve Ahiret İnancı</small></a><br>
+                        <a href=""><small>Hac ve Kurban</small></a><br>
+                        <a href=""><small>Ahlaki Davranışlar</small></a><br>
+                        <a href=""><small>Allahın Kulu ve Elçisi Hz.Muhammed</small></a><br>
+                        <a href=""><small>İslam Düşüncesinde Yorumlar</small></a><br>
+                    </div>
+                </div>
+                <div class="col-sm-3 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="1400ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <img src="{% static "images/home/8-sinif.png" %}" alt="">
+                        </div>
+                        <h2>8.Sınıf Üniteler</h2>
+                        <a href=""><small>Kader İnancı</small></a><br>
+                        <a href=""><small>Zekat ve Sadaka</small></a><br>
+                        <a href=""><small>Din ve Hayat</small></a><br>
+                        <a href=""><small>Hz. Muhammedin Örnekliği</small></a><br>
+                        <a href=""><small>Kuran-ı Kerim ve Özellikleri</small></a><br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--/#services-->
+
+    <section id="action" class="responsive">
+        <div class="vertical-center">
+             <div class="container">
+                <div class="row">
+                    <div class="action take-tour">
+                        <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <h1 class="title">Ayet - Hadis</h1>
+                            <p>“Ey Rabbimiz! Biz inandık, bizi bağışla, bize merhamet et, sen merhamet edenlerin en hayırlısısın”<small>- Mü’minün Suresi 109</small> </p>
+                            <p>“Doğru olmayan birşey gördüğünüzde veya işittiğinizde, insanların heybeti, hakkı söylemekten sizi alıkoymasın.” <small>- İmam Taberâni, Mu’cemu’s-Sağir, 2/185</small> </p>
+                        </div>
+                        <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+
+                            <div class="tour-button">
+
+                               <!-- <a href="#" class="btn btn-common">Button</a> -->
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+    <!--/#action-->
+
+    <section id="features">
+        <div class="container">
+            <div class="row">
+                <div class="single-features">
+                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="{% static "images/home/kuaran-400x184.png" %}" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>Kur'an-ı Kerim'in Özellikleri</h2>
+                        <P>Kur’anı Kerim, Hz.Muhammed’e (sav) Cebrail aracılığıyla Arapça olarak gelen bize kadar tevatür yoluyla ulaşmış olan İslam Dininin kutsal kitabının özellikleri:</P>
+                    </div>
+                </div>
+                <div class="single-features">
+                    <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>Esma-ül Hüsna</h2>
+                        <P>Esma’ül Hüsna Allah’ın en güzel isimlerini belirtir. Allah’ın bu isimlerini bilmek, anlamlarını öğrenmek hem Allah’ı daha iyi tanımaya hem de faziletlerine nail olmayı sağlar.</P>
+                    </div>
+                    <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="{% static "images/home/esmaulhusna.png" %}" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="single-features">
+                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="{% static "images/home/hzmuhammed.png" %}" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>Hilye-i Şerif</h2>
+                        <P>Hilye-i Şerif Hz Peygamberin (SAV) fiziksel özelliklerin ve güzelliğini yazılı bir metin ile resmetmek demektir. </P>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!--/#features-->
+
+    <section id="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <p><img src="{% static "images/home/clients.png" %}" class="img-responsive" alt=""></p>
+                        <h1 class="title">Bir Ayet</h1>
+                        <p>Güzel bir söz ve bağışlama, peşinden gönül kırma gelen bir sadakadan daha hayırlıdır. <br> Allah, her bakımdan sınırsız zengindir, halimdir (hemen cezalandırmaz, mühlet verir).</p>
+                        <h4 class="title">Bakara 263</h4>
+                    </div>
+                    <div class="clients-logo wow fadeIn text-center" data-wow-duration="1000ms" data-wow-delay="600ms">
+
+                        {% load hit_tag %}
+                        {% hit_tags as tags %}
+                        {% for tag in tags %}
+                        <div class="col-xs-3  ">
+                            <a href="{% url 'detay' slug=tag.slug %}" ><img src="{{ tag.resim.url }}" class="img-responsive" alt=""></a>
+                        </div>
+                        {% endfor %}
+                    <!--
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="{% static "images/home/130x55-2.png" %}" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="{% static "images/home/130x55-1.png" %}" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="{% static "images/home/130x55-2.png" %}" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="{% static "images/home/130x55-1.png" %}" class="img-responsive" alt=""></a>
+                        </div>
+                         <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="{% static "images/home/130x55-2.png" %}" class="img-responsive" alt=""></a>
+                        </div>
+                        -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+    <!--/#clients-->
+
+{% endblock %}

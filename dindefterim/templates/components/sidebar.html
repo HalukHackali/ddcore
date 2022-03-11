@@ -1,0 +1,67 @@
+{% load static %}
+
+{% load sinif_list %}
+{% sinif_list as siniflar %}
+
+{% load konu_list %}
+{% konu_list as konular %}
+
+{% load hit_tag %}
+{% hit_tags as tags %}
+
+
+
+    <div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">
+
+                        <div class="sidebar-item categories">
+                            <h3>Sınıflar</h3>
+                            <ul class="nav navbar-stacked">
+                                {% for sinif in siniflar %}
+                                <li class="active"><a href="{% url 'sinif' sinifSlug=sinif.slug %}">{{ sinif.isim }}<span class="pull-right">{{ sinif.yazi_count }}</span></a></li>
+                               {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar-item tag-cloud">
+                            <h3>Etiketler</h3>
+                            <ul class="nav nav-pills">
+                                {% for konu in konular %}
+                                <li><a href="{% url 'konu' konuSlug=konu.slug %}">{{ konu.isim }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar-item  recent">
+                            <h3>En Çok Okunan Yazılar</h3>
+
+
+                            {% for tag in tags %}
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="#"><img src="{{ tag.resim.url }}" alt="" style="width: 85px; height: 40px;"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="{% url 'detay' slug=tag.slug %}">{{ tag.baslik }}</a></h4>
+                                    <p><span class="hit-count">{{ tag.hit }} kez okundu </span> </p>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+
+
+
+                        <div class="sidebar-item popular">
+                            <h3>Resimler</h3>
+                            <ul class="gallery">
+                                <li><a href="#"><img src="{% static "images/portfolio/popular1.jpg" %}" alt=""></a></li>
+                                <li><a href="#"><img src="{% static "images/portfolio/popular2.jpg" %}" alt=""></a></li>
+                                <li><a href="#"><img src="{% static "images/portfolio/popular3.jpg" %}" alt=""></a></li>
+                                <li><a href="#"><img src="{% static "images/portfolio/popular4.jpg" %}" alt=""></a></li>
+                                <li><a href="#"><img src="{% static "images/portfolio/popular5.jpg" %}" alt=""></a></li>
+                                <li><a href="#"><img src="{% static "images/portfolio/popular1.jpg" %}" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>

@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  djangoapp2:
+    build: .
+    volumes:
+      - .:/code
+      - static_volume:/opt/services2/djangoapp2/static
+      - media_volume:/opt/services2/djangoapp2/media
+    networks:
+      - nginx_network
+      - database2_network
+    depends_on:
+      - database2
+
+  nginx:
+    image: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static_volume:/opt/services2/djangoapp2/static
+      - media_volume:/opt/services2/djangoapp2/media
+    depends_on:
+      - djangoapp2
+    networks:
+      - nginx_network
+
+  database2:
+    image: postgres
+    env_file:
+      - config/db/database2_env
+    networks:
+      - database2_network
+    volumes:
+      - database2_volume:/var/lib/postgresql/data
+
+networks:
+  nginx_network:
+    driver: bridge
+  database2_network:
+    driver: bridge
+
+volumes:
+  database2_volume:
+  static_volume:
+  media_volume:
+

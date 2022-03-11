@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title%} Yazilarim {% endblock%}
+
+{% block content %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Başlık</th>
+        <th scope="col">Güncellenme Tarihi</th>
+        <th scope="col">Aksiyonlar</th>
+      </tr>
+    </thead>
+    <tbody>
+            {% for yazi in yazilar %}
+            <tr>
+                <th scope="row">{{ yazi.id }}</th>
+                <td>{{ yazi.baslik }}</td>
+                <td>{{ yazi.duzenlenme_tarihi }}</td>
+                <td>
+                    <p>
+                        <a class="btn btn-danger" href="{% url 'yazi-sil' slug=yazi.slug %}">Sil</a>
+                        <a class="btn btn-primary" href="{% url 'yazi-guncelle' slug=yazi.slug %}">Düzenle</a>
+                    </p>
+                </td>
+            </tr>
+            {% empty %}
+              <div class="alert alert-warning" role="alert">
+                <p>Hiç yazınız yok.</p>
+              </div>
+            {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+                    <div class="blog-pagination"><!-- =============PAGINATION============== -->
+
+                        <ul class="pagination">
+
+                        {% if yazilar.has_previous %}
+                          <li class="active"><a href="?sayfa={{ yazilar.previous_page_number }}">left</a></li>
+                        {% else %}
+                            <li>
+                              <a href="#">left</a>
+                          </li>
+                        {%  endif %}
+
+                             <li class="active"><a href="#">{{ yazilar.number }}</a></li>
+
+                        {% if yazilar.has_next %}
+                            <li class="active"><a href="?sayfa={{ yazilar.next_page_number }}">right</a></li>
+                       {% else %}
+                            <li class="active"><a href="?sayfa={{ yazilar.paginator.num_pages }}">right</a></li>
+                        {% endif %}
+
+                        </ul>
+                    </div>
+
+
+
+{% endblock %}
